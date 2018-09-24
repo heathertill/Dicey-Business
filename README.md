@@ -24,7 +24,7 @@ _Hints_
 * You will probably want to store each Die you create in a global array. This may be helpful when it comes time to roll all the dice.
 * Clicking the `Roll Dice` button can loop through that array, where you will have access to the properties and methods of each Die object.
 
-###*__Above & Beyond__*
+### *__Above & Beyond__*
 
 Try extending the functionality of this lab to support the following features. They are listed in order from easiest to hardest to implement.
 
