@@ -1,40 +1,53 @@
-
-
+let dieContainer = document.createElement('div');
+dieContainer.id =  'dieContainer';
+document.body.appendChild(dieContainer);
 let linebreak = document.createElement('br');
 linebreak.id = 'linebreak';
 document.body.appendChild(linebreak);
 let btn = document.getElementById('genDie');
-btn.addEventListener('click', newDie);
 let rollBtn = document.getElementById('rollDie');
-rollBtn.addEventListener('click', rollDie)
+let allDie = [];
+diceAmount.addEventListener('click', () => sumDice());  
+btn.addEventListener('click', () => makeDice());
 
 class Die {
     constructor() {
         this.die = document.createElement('div');
-        document.body.appendChild(this.die);
+        dieContainer.appendChild(this.die);
         this.die.className = 'randomDie';
-        this.die.style.cssFloat = 'left';
-        this.value = 0;
-        this.roll()
-    }
-
-    // roll() generates random integer 1-6, sets the property value, updates the div w/ new value
-    roll() {
-        this.value = Math.floor(Math.random() * (7 - 1)) + 1;
         this.die.textContent = this.value;
-        
+        this.value = 0;
+        this.index = allDie.length
+        this.roll();
+        rollBtn.addEventListener('click', () => this.roll());
+        this.die.addEventListener('dblclick', () => this.removeDie())
+        this.die.addEventListener('click', () => this.roll())
     }
 
-    
-}
-function newDie() {
-    let die1 = new Die();
+    roll() {
+        this.value = randomVal();
+        this.die.textContent = this.value;
+    }
+
+    removeDie() {
+        allDie = allDie.filter(die => die.index != this.index)
+        this.die.remove();
+    }
 }
 
-function reroll() {
-    let randomDie = document.getElementsByClassName('randomDie');
-    let rollDie = document.getElementById('rollDie');
-    rollDie.addEventListener('click', function() {
-        Die.roll(randomDie)
-    });
+function makeDice() {
+    let eachDie = new Die();
+    allDie.push(eachDie);
 }
+
+function sumDice() {
+    let dieSum = 0;
+    allDie.forEach(randomDie => dieSum += randomDie.value);
+    alert(dieSum)
+}
+
+function randomVal() {
+    return Math.floor(Math.random() * (7 - 1)) + 1;
+}
+
+
